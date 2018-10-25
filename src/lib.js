@@ -1,16 +1,22 @@
 const makeConstant = function(input){
   return function(text){
-    return input
+    return input;
   };
 }
 
 const makeCounterFromN = function(number){
   return function(){
-    return number++
+    return number++;
   }
 }
 
-const makeCounterFromZero = undefined;
+const makeCounterFromZero = function(){
+  let initialNumber = 0;
+  return function(){
+    return initialNumber++;
+  }
+}
+
 const makeDeltaTracker = undefined;
 const makeFiboGenerator = undefined;
 const makeCycler = undefined;
