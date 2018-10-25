@@ -30,30 +30,35 @@ const makeDeltaTracker = function(oldDelta){
 
 
 const makeFiboGenerator = function(number1,number2){
-  let object = {fibo:0,first:number1,second:number2};
+  let fiboTracker = {fibo:0,first:number1,second:number2};
   if(!number2){
-  object = {fibo:0,first:0,second:number1};
+    fiboTracker = {fibo:0,first:0,second:number1};
   }
   if(!number1){
-  object = {fibo:0,first:0,second:1};
+    fiboTracker = {fibo:0,first:0,second:1};
   }
   return function(){
-    object.fibo = object.first;
-    object.first =object.second;
-    object.second = object.fibo+object.first;
-    return object.fibo;
+    fiboTracker.fibo = fiboTracker.first;
+    fiboTracker.first =fiboTracker.second;
+    fiboTracker.second = fiboTracker.fibo+fiboTracker.first;
+    return fiboTracker.fibo;
   }
 }
 
 
-const makeCycler = function(array){
+const returnElement = function(element){
+  return element;
+}
+
+const makeCycler = function(record){
+  let newRecord = record.map(returnElement);
   let number = -1;
   return function(){
     number++;
-    if(number==array.length){
+    if(number==newRecord.length){
       number =0;
     }
-    return array[number];
+    return newRecord[number];
   }
 }
 
