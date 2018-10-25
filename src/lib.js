@@ -29,14 +29,34 @@ const makeDeltaTracker = function(oldDelta){
 }
 
 
-const makeFiboGenerator = undefined;
-const makeCycler = undefined;
-/*const makeCycler = function(array){
-  return function(){
-  array= array.slice(1).concat(array[0]);
-    return array[0];
+const makeFiboGenerator = function(number1,number2){
+  let object = {fibo:0,first:number1,second:number2};
+  if(!number2){
+  object = {fibo:0,first:0,second:number1};
   }
-}*/
+  if(!number1){
+  object = {fibo:0,first:0,second:1};
+  }
+  return function(){
+    object.fibo = object.first;
+    object.first =object.second;
+    object.second = object.fibo+object.first;
+    return object.fibo;
+  }
+}
+
+
+const makeCycler = function(array){
+  let number = -1;
+  return function(){
+    number++;
+    if(number==array.length){
+      number =0;
+    }
+    return array[number];
+  }
+}
+
 const curry = function(functions,input1){
   return function(input2,input3){
     return functions(input1,input2,input3);
