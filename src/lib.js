@@ -15,7 +15,8 @@ const makeCounterFromZero = function(){
 }
 
 const makeDeltaTracker = function(oldDelta){
-  deltaTracker = {old:oldDelta,delta:0,new:oldDelta};
+  let countNumber = makeCounterFromN(0);
+  let deltaTracker = {old:oldDelta,delta:0,new:oldDelta};
   return function(delta){
     if(delta){
       deltaTracker.old = deltaTracker.new;
@@ -27,9 +28,21 @@ const makeDeltaTracker = function(oldDelta){
   }
 }
 
+
 const makeFiboGenerator = undefined;
 const makeCycler = undefined;
-const curry = undefined;
+/*const makeCycler = function(array){
+  return function(){
+  array= array.slice(1).concat(array[0]);
+    return array[0];
+  }
+}*/
+const curry = function(functions,input1){
+  return function(input2,input3){
+    return functions(input1,input2,input3);
+  }
+}
+
 const compose = undefined;
 
 exports.makeConstant=makeConstant;
