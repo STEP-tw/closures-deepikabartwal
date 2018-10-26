@@ -1,6 +1,6 @@
-const makeConstant = function(input){
+const makeConstant = function(constant){
   return function(text){
-    return input;
+    return constant;
   };
 }
 
@@ -68,9 +68,9 @@ const curry = function(functions,input1){
   }
 }
 
-const compose = function(function1,function2){
+const compose = function(outerfunction,innerfunction){
   return function(input1,input2){
-    return function1(function2(input1,input2));
+    return outerfunction(innerfunction(input1,input2));
   }
 }
 
