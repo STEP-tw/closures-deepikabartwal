@@ -15,16 +15,16 @@ const makeCounterFromZero = function(){
 }
 
 const makeDeltaTracker = function(oldDelta){
-  let countNumber = makeCounterFromN(0);
-  let deltaTracker = {old:oldDelta,delta:0,new:oldDelta};
+  let currentDelta=0;
+  let newDelta=oldDelta;
   return function(delta){
     if(delta){
-      deltaTracker.old = deltaTracker.new;
-      deltaTracker.delta = delta;
-      deltaTracker.new = delta+deltaTracker.old;
-      return deltaTracker;
+      oldDelta = newDelta;
+      currentDelta = delta;
+      newDelta = delta+oldDelta;
+      return deltaTracker={old:oldDelta,delta:currentDelta,new:newDelta};
     }
-    return deltaTracker;
+    return deltaTracker={old:oldDelta,delta:currentDelta,new:newDelta};
   }
 }
 
