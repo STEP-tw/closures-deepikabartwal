@@ -17,26 +17,17 @@ const makeCounterFromZero = function(){
 const makeDeltaTracker = function(oldDelta){
   let currentDelta=0;
   let newDelta=oldDelta;
-  return function(delta){
-    if(delta){
-      oldDelta = newDelta;
-      currentDelta = delta;
-      newDelta = delta+oldDelta;
-      return deltaTracker={old:oldDelta,delta:currentDelta,new:newDelta};
-    }
+  return function(delta=0){
+    oldDelta = newDelta;
+    currentDelta = delta;
+    newDelta = delta+oldDelta;
     return deltaTracker={old:oldDelta,delta:currentDelta,new:newDelta};
   }
 }
 
 
-const makeFiboGenerator = function(number1,number2){
-  let fiboTracker = {fibo:0,first:number1,second:number2};
-  if(!number2){
-    fiboTracker = {fibo:0,first:0,second:number1};
-  }
-  if(!number1){
-    fiboTracker = {fibo:0,first:0,second:1};
-  }
+const makeFiboGenerator = function(number1=1,number2=0){
+  let fiboTracker = {fibo:0,first:Math.min(number1,number2),second:Math.max(number1,number2)};
   return function(){
     fiboTracker.fibo = fiboTracker.first;
     fiboTracker.first =fiboTracker.second;
@@ -53,12 +44,10 @@ const returnElement = function(element){
 const makeCycler = function(record){
   let newRecord = record.map(returnElement);
   let number = -1;
+  let length = newRecord.length;
   return function(){
     number++;
-    if(number==newRecord.length){
-      number =0;
-    }
-    return newRecord[number];
+    return newRecord[number%length];
   }
 }
 
