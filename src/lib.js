@@ -37,12 +37,12 @@ const makeFiboGenerator = function(number1=1,number2=0){
 }
 
 
-const returnElement = function(element){
+const identity = function(element){
   return element;
 }
 
 const makeCycler = function(record){
-  let newRecord = record.map(returnElement);
+  let newRecord = record.map(identity);
   let number = -1;
   let length = newRecord.length;
   return function(){
